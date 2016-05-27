@@ -1,0 +1,24 @@
+{
+  "name": "xjst-vidom",
+  "version": "0.0.1",
+  "description": "Experimental xjst engine for virtual dom libraries",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "xjst",
+    "vidom",
+    "virtual",
+    "dom",
+    "react",
+    "BEMHTML",
+    "templates"
+  ],
+  "author": "Alexey Gurianov <gurianov@gmail.com>",
+  "license": "MPL-2.0",
+  "dependencies": {
+    "bem-xjst": "^6.5.1",
+    "inherits": "^2.0.1"
+  }
+}
