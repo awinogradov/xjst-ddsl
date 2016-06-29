@@ -1,5 +1,5 @@
 {
-  "name": "xjst-vidom",
+  "name": "xjst-ddsl",
   "version": "0.0.1",
   "description": "Experimental xjst engine for virtual dom libraries",
   "main": "index.js",
