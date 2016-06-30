@@ -1,6 +1,6 @@
 {
   "name": "xjst-ddsl",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Experimental ddsl engine for virtual dom libraries on xjst",
   "main": "index.js",
   "scripts": {
@@ -20,10 +20,10 @@
   "author": "Anton Winogradov <winogradovaa@gmail.com>",
   "dependencies": {
     "inherits": "^2.0.1",
-    "browserify": "^13.0.1",
     "bem-xjst": "^6.5.1"
   },
   "devDependencies": {
+    "browserify": "^13.0.1"
   },
   "license": "MIT"
 }
