@@ -1,5 +1,7 @@
 # DDSL Engine for XJST
 
+[![Build Status](https://travis-ci.org/awinogradov/xjst-ddsl.svg?branch=master)](https://travis-ci.org/awinogradov/xjst-ddsl)
+
 > npm i --save-dev xjst-ddsl
 
 ## Usage
