@@ -1,6 +1,6 @@
 {
   "name": "xjst-ddsl",
-  "version": "0.0.4",
+  "version": "1.0.0",
   "description": "Experimental ddsl engine for virtual dom libraries on xjst",
   "main": "index.js",
   "scripts": {
