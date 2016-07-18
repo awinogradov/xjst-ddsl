@@ -6,8 +6,9 @@
   "scripts": {
     "clean": "rm -f lib/ddsl/bundle.js",
     "make": "browserify --standalone ddsl lib/ddsl/index.js -o lib/ddsl/bundle.js",
-    "prepublish": "npm run make",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "postinstall": "npm run make",
+    "mocha-test": "mocha --reporter=spec test/*-test.js",
+    "test": "npm run make && npm run mocha-test"
   },
   "keywords": [
     "xjst",
@@ -19,11 +20,18 @@
   ],
   "author": "Anton Winogradov <winogradovaa@gmail.com>",
   "dependencies": {
+    "bem-xjst": "^7.0.0",
     "inherits": "^2.0.1",
-    "bem-xjst": "^6.5.1"
+    "pascal-case": "^2.0.0",
+    "props2mods": "github:awinogradov/props2mods"
   },
   "devDependencies": {
-    "browserify": "^13.0.1"
+    "assert": "^1.4.1",
+    "browserify": "^13.0.1",
+    "chai": "^3.5.0",
+    "mocha": "^2.5.3",
+    "react": "^15.2.1",
+    "react-dom": "^15.2.1"
   },
   "license": "MIT"
 }
