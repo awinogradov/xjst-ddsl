@@ -6,7 +6,7 @@ const assert = require('assert');
 require('chai').should();
 
 module.exports = function(settings) {
-    const runtime = new ddsl.Engine();
+    const runtime = new ddsl.Engine(settings);
     const exports = {};
 
     function compile(fn, options) {
@@ -14,9 +14,7 @@ module.exports = function(settings) {
             options = fn;
             fn = function() {};
         }
-        var ddslRuntime = {
-            settings: settings || {}
-        };
+        var ddslRuntime = {};
         runtime.compile(fn, options || {});
         runtime.exportApply(ddslRuntime);
         return ddslRuntime;
