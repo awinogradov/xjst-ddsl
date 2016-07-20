@@ -14,12 +14,12 @@ describe('BEMJSON tag', function() {
       }, { block: 'btn', tag: 'button' }, 'button');
   });
 
-  it('should render without tag', function() {
+  it('should render without tag with block mod', function() {
     test(function() {
-      }, { tag: false, content: 'ok' }, [ 'div', null, [ 'span', null, 'ok' ] ]);
+    }, { tag: false, block: 'bbb', content: 'ok' }, [ 'div', null, 'ok' ]);
   });
-  // #6
-  xit('should render without tag - #6', function() {
+
+  it('should render without tag', function() {
     test(function() {
       }, { tag: false, content: 'ok' }, ['div', null, 'ok']);
   });

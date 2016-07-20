@@ -37,7 +37,7 @@ describe('React constructors detection', function() {
     expect(res).to.have.property('$$typeof');
     expect(res).to.have.property('props');
     expect(res).to.have.property('type');
-    expect(res.type).to.be.equal('Button');
+    expect(res.type.name).to.be.equal('Button');
   });
 
   it('should replace blocks by ReactElement\'s in deep of bemjson', function () {
@@ -70,9 +70,9 @@ describe('React constructors detection', function() {
       expect(reactEl).to.have.property('props');
       expect(reactEl).to.have.property('type');
     });
-    expect(link1.type).to.be.equal('Link');
-    expect(link1.type).to.be.equal('Link');
-    expect(fuck.type).to.be.equal('FuckTheBit');
+    expect(link1.type.name).to.be.equal('Link');
+    expect(link2.type.name).to.be.equal('Link');
+    expect(fuck.type.name).to.be.equal('FuckTheBit');
   });
 
   it('should convert bemjson to props for ReactElement', function () {
