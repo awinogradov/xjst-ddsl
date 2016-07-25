@@ -1,4 +1,9 @@
-var test = require('./fixtures')().test;
+'use strict';
+
+const test = require('./fixtures')().test;
+const compile = require('./fixtures')().compile;
+const assert = require('assert');
+const expect = require('chai').expect;
 
 describe('BEMJSON attrs', function() {
   it('should render without block by default', function () {
@@ -81,6 +86,11 @@ describe('BEMJSON attrs', function() {
         return { attribute: '"tom&jerry"' };
       });
     }, { block: 'b' },  ['div', { className: 'b', attribute: '&quot;tom&amp;jerry&quot;' }]);
+  });
+
+  it('should ignore function in attrs', function() {
+    var res = compile('').apply({ block: 'b7', attrs: { test: function() {} } });
+    expect(res[1].test).to.be.a('function');
   });
 
 });
