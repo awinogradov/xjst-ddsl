@@ -20,10 +20,8 @@
   ],
   "author": "Anton Winogradov <winogradovaa@gmail.com>",
   "dependencies": {
-    "bem-xjst": "^7.0.0",
-    "inherits": "^2.0.1",
-    "pascal-case": "^2.0.0",
-    "props2mods": "github:awinogradov/props2mods"
+    "bem-xjst": "github:awinogradov/bem-xjst#js-bindings",
+    "inherits": "^2.0.1"
   },
   "devDependencies": {
     "assert": "^1.4.1",
