@@ -4,9 +4,6 @@
   "description": "Experimental ddsl engine for virtual dom libraries on xjst",
   "main": "index.js",
   "scripts": {
-    "clean": "rm -f lib/ddsl/bundle.js",
-    "make": "browserify --standalone ddsl lib/ddsl/index.js -o lib/ddsl/bundle.js",
-    "postinstall": "npm run make",
     "test": "mocha --reporter=spec test/*-test.js"
   },
   "keywords": [
