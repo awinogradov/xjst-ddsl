@@ -1,13 +1,87 @@
 'use strict';
 
-const React = require('react');
-
 const assert = require('assert');
-const compile = require('./fixtures')({
-  constructor: function (ddsl, js) {
-    console.log(js);
-    ddsl[1] = Object.assign(ddsl[1] || {}, js);
 
+const React = require('react');
+const camelCase = require('camel-case');
+const capitalizableDict = {
+  acceptcharset: 'acceptCharset',
+  accesskey: 'accessKey',
+  allowfullscreen: 'allowFullScreen',
+  allowtransparency: 'allowTransparency',
+  autocomplete: 'autoComplete',
+  autofocus: 'autoFocus',
+  autoplay: 'autoPlay',
+  cellpadding: 'cellPadding',
+  cellspacing: 'cellSpacing',
+  charset: 'charSet',
+  classid: 'classID',
+  class: 'className',
+  classname: 'className',
+  colspan: 'colSpan',
+  contenteditable: 'contentEditable',
+  contextmenu: 'contextMenu',
+  crossorigin: 'crossOrigin',
+  datetime: 'dateTime',
+  enctype: 'encType',
+  formaction: 'formAction',
+  formenctype: 'formEncType',
+  formmethod: 'formMethod',
+  formnovalidate: 'formNoValidate',
+  formtarget: 'formTarget',
+  frameborder: 'frameBorder',
+  htmlfor: 'htmlFor',
+  for: 'htmlFor',
+  httpequiv: 'httpEquiv',
+  marginheight: 'marginHeight',
+  marginwidth: 'marginWidth',
+  maxlength: 'maxLength',
+  mediagroup: 'mediaGroup',
+  novalidate: 'noValidate',
+  radiogroup: 'radioGroup',
+  readonly: 'readOnly',
+  rowspan: 'rowSpan',
+  spellcheck: 'spellCheck',
+  srcdoc: 'srcDoc',
+  srcset: 'srcSet',
+  tabindex: 'tabIndex',
+  usemap: 'useMap',
+  value: 'defaultValue',
+  checked: 'defaultChecked'
+};
+const compile = require('./fixtures')({
+  // REACT TRANSFORMATIONS
+  generateKeys: true,
+  constructor: function (ddsl, js) {
+    var props = null;
+    if (ddsl[1]) {
+      props = ddsl[1];
+      // capitalize react props
+      Object.keys(ddsl[1]).forEach(function (key) {
+        if (capitalizableDict[key]) {
+          props[capitalizableDict[key]] = ddsl[1][key];
+        } else {
+          props[key] = ddsl[1][key];
+        }
+      });
+      // objectify inline styles
+      if (props.style) {
+        props.style = props.style.split(';').reduce((ruleMap, ruleString) => {
+          if (ruleString) {
+            var rulePair = ruleString.split(/:(.+)/);
+            ruleMap[camelCase(rulePair[0].trim())] = rulePair[1].trim();
+          }
+          return ruleMap;
+        }, {});
+      }
+    }
+    // bind events
+    if (js) {
+      props = Object.assign(props || {}, js);
+    }
+    // props are second argument
+    ddsl[1] = props;
+    // return react element to runtime
     return React.createElement.apply(
       React.createElement,
       ddsl
@@ -17,7 +91,7 @@ const compile = require('./fixtures')({
 
 const expect = require('chai').expect;
 
-describe('React components', function() {
+describe('React transformation', function() {
 
   it('should replace simple bemjson by ReactElement', function () {
     var res = compile('').apply({
@@ -58,7 +132,6 @@ describe('React components', function() {
     var res = compile('').apply('text');
 
     expect(res).to.have.property('$$typeof');
-    // expect(res).to.have.property('props');
     expect(res.type).to.be.equal('span');
   });
 
@@ -72,7 +145,6 @@ describe('React components', function() {
     });
 
     expect(res).to.have.property('$$typeof');
-    // expect(res).to.have.property('props');
     expect(res.type).to.be.equal('button');
   });
 
@@ -102,56 +174,4 @@ describe('React components', function() {
     // expect(res).to.have.property('props');
     expect(res.type).to.be.equal('button');
   });
-
-//   it('should replace blocks by ReactElement\'s in deep of bemjson', function () {
-//     var res = compile('').apply({
-//       block: 'b1',
-//       content: [
-//         { block: 'b2' },
-//         { block: 'link' }, // 1
-//         {
-//           tag: 'b',
-//           content: [
-//             '',
-//             { block: 'link' }, // 2
-//             { content: {
-//               block: 'fuck-the-bit'
-//             } }
-//           ]
-//         }
-//       ]
-//     });
-//
-//     var b1 = res;
-//     var link1 = b1[3];
-//     var b = b1[4];
-//     var link2 = b[2];
-//     var fuck = b[3][2];
-//
-//     [link1, link2, fuck].forEach(reactEl => {
-//       expect(reactEl).to.have.property('$$typeof');
-//       expect(reactEl).to.have.property('props');
-//       expect(reactEl).to.have.property('type');
-//     });
-//     expect(link1.type.name).to.be.equal('Link');
-//     expect(link2.type.name).to.be.equal('Link');
-//     expect(fuck.type.name).to.be.equal('FuckTheBit');
-//   });
-//
-//   it('should convert bemjson to props for ReactElement', function () {
-//     var res = compile('').apply({
-//       block: 'button',
-//       mods: { m1: 'm1' },
-//       text: 'text',
-//       content: 'content'
-//     });
-//
-//     expect(res).to.have.property('props');
-//     expect(res.props).to.have.property('m1');
-//     expect(res.props.m1).to.be.equal('m1');
-//     expect(res.props).to.have.property('text');
-//     expect(res.props.text).to.be.equal('text');
-//     expect(res.props).to.have.property('content');
-//     expect(res.props.children).to.be.equal('content');
-//   });
 });

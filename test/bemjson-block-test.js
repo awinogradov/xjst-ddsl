@@ -20,7 +20,9 @@ describe('BEMJSON block', function() {
             }
           }
         }
-      ], ['div', { className: 'b1' }, ['span', null, ['div', { className: 'b2' }]]]);
+      ], ['div', { className: 'b1' },
+          ['span', null,
+            ['div', { className: 'b2' }]]]);
   });
 
   it('should inherit block from the parent, and reset it back', function() {

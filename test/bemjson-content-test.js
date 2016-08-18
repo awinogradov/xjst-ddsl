@@ -5,12 +5,6 @@ describe('BEMJSON content', function() {
   it('should render block by default as div', function () {
     test(function() {
       }, [{ content: 'Hello, ddsl!' }],
-          ['div', null, ['span', null, 'Hello, ddsl!']]);
-  });
-  // #6
-  xit('should render block by default as div', function () {
-    test(function() {
-      }, [{ content: 'Hello, ddsl!' }],
           ['div', null, 'Hello, ddsl!']);
   });
 

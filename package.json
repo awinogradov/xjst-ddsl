@@ -7,8 +7,7 @@
     "clean": "rm -f lib/ddsl/bundle.js",
     "make": "browserify --standalone ddsl lib/ddsl/index.js -o lib/ddsl/bundle.js",
     "postinstall": "npm run make",
-    "mocha-test": "mocha --reporter=spec test/*-test.js",
-    "test": "npm run make && npm run mocha-test"
+    "test": "mocha --reporter=spec test/*-test.js"
   },
   "keywords": [
     "xjst",
@@ -26,6 +25,7 @@
   "devDependencies": {
     "assert": "^1.4.1",
     "browserify": "^13.0.1",
+    "camel-case": "^3.0.0",
     "chai": "^3.5.0",
     "mocha": "^2.5.3",
     "react": "^15.2.1",

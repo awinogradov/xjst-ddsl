@@ -2,33 +2,15 @@ var test = require('./fixtures')().test;
 
 describe('BEMJSON values', function() {
   it('should work with empty input', function() {
-    test(function() {
-      }, '', ['span', null, '']);
-  });
-  // #6
-  xit('should work with empty input - #6', function() {
-    test(function() {
-      }, '', ['div', null, '']);
+    test(function() {}, '', '');
   });
 
   it('should work with null input', function() {
-    test(function() {
-      }, null, ['span', null, '']);
-  });
-  // #6
-  xit('should work with null input - #6', function() {
-    test(function() {
-      }, null, ['div', null, '']);
+    test(function() {}, null, '');
   });
 
   it('should work with 0 input', function() {
-    test(function() {
-    }, 0, ['span', null, '0']);
-  });
-  // #6
-  xit('should work with 0 input - #6', function() {
-    test(function() {
-      }, 0, ['div', null, '0']);
+    test(function() {}, 0, '0');
   });
 
   it('should not render `undefined`', function () {
