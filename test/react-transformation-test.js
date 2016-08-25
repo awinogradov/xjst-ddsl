@@ -52,7 +52,7 @@ const capitalizableDict = {
 const compile = require('./fixtures')({
   // REACT TRANSFORMATIONS
   generateKeys: true,
-  constructor: function (ddsl, js) {
+  constructor: function (ddsl, context, js) {
     var props = null;
     if (ddsl[1]) {
       props = ddsl[1];
@@ -152,12 +152,6 @@ describe('React transformation', function() {
     var res = compile(function() {
       block('button')(
         tag()('button'),
-        onClick()(function () {
-          return 'click';
-        }),
-        onMouseDown()(function () {
-          return 'mousedown';
-        }),
         js()(function () {
           return this.extend(applyNext(), {
             onHover: function () {
@@ -171,7 +165,8 @@ describe('React transformation', function() {
     });
 
     expect(res).to.have.property('$$typeof');
-    // expect(res).to.have.property('props');
+    expect(res).to.have.property('props');
+    expect(res.props.onHover()).to.be.eq('hover');
     expect(res.type).to.be.equal('button');
   });
 });

@@ -16,7 +16,7 @@
   ],
   "author": "Anton Winogradov <winogradovaa@gmail.com>",
   "dependencies": {
-    "bem-xjst": "github:awinogradov/bem-xjst#js-bindings",
+    "bem-xjst": "^7.0.3",
     "inherits": "^2.0.1"
   },
   "devDependencies": {
