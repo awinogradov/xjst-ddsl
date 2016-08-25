@@ -169,4 +169,20 @@ describe('React transformation', function() {
     expect(res.props.onHover()).to.be.eq('hover');
     expect(res.type).to.be.equal('button');
   });
+
+  it('should work with React methods from bemjson', function () {
+    var res = compile(function() {
+    }).apply({
+      block: 'button',
+      js: {
+        onClick: function () {
+          return 'click';
+        }
+      }
+    });
+
+    expect(res).to.have.property('$$typeof');
+    expect(res).to.have.property('props');
+    expect(res.props.onClick()).to.be.eq('click');
+  });
 });
